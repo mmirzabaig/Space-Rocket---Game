@@ -5,34 +5,61 @@ canvas.height = window.innerHeight;
 
 let ctx = canvas.getContext('2d');
 
-// document.addEventListener("keydown", keyDownHandler, false);
-// document.addEventListener("keyup", keyUpHandler, false);
-//
-// function keyDownHandler(e) {
-//   if(e.keyCode == 39) {
-//     rightPressed = true;
-//   }
-//   else if(e.keyCode == 37) {
-//     leftPressed = true;
-//   }
-// }
-// function keyUpHandler(e) {
-//   if(e.keyCode == 39) {
-//     rightPressed = false;
-//   }
-//   else if(e.keyCode == 37) {
-//     leftPressed = false;
-//   }
-// }
-const rocket = () => {
 
-  ctx.beginPath();
-  ctx.moveTo(75, 50);
-  ctx.lineTo(90, 85);
-  ctx.lineTo(60, 85);
-  ctx.fill();
-
+let rightPressed = false;
+let leftPressed = false;
+document.addEventListener("keydown", keyDownHandler, false);
+document.addEventListener("keyup", keyUpHandler, false);
+function keyDownHandler(e) {
+  if(e.keyCode == 39) {
+    rightPressed = true;
+  }
+  else if(e.keyCode == 37) {
+    leftPressed = true;
+  }
 }
+function keyUpHandler(e) {
+  if(e.keyCode == 39) {
+    rightPressed = false;
+  }
+  else if(e.keyCode == 37) {
+    leftPressed = false;
+  }
+}
+// const rocket = () => {
+//
+//   ctx.beginPath();
+//   ctx.moveTo(75, 50);
+//   ctx.lineTo(90, 85);
+//   ctx.lineTo(60, 85);
+//   ctx.fill();
+//
+// }
+class Rocket {
+  constructor(x, y, dx, dy, radius) {
+    this.x = x;
+    this.y = y;
+    this.dx = dx;
+    this.dy = dy;
+    this.radius = radius;
+  }
+  draw() {
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
+    ctx.strokeStyle = 'blue';
+    // ctx.fillStyle = 'blue';
+    ctx.fill();
+    ctx.stroke();
+  }
+  update () {
+    if (rightPressed) {
+      this.x += 1;
+    } else if (leftPressed)
+      this.x -= 1;
+  }
+}
+var ship = new Rocket(500, 800, 0, 0, 30);
+
 
 
 class Planet {
@@ -81,11 +108,13 @@ function animate() {
   ctx.clearRect(0, 0, innerWidth, innerHeight);
 
   for (let i = 0; i < planetArray.length; i++) {
+    ship.draw();
+    ship.update();
     planetArray[i].draw();
     planetArray[i].update();
 
   }
-  rocket();
+  // rocket();
 }
 let time = 200;
 

@@ -1,20 +1,10 @@
 canvas {
-  position: absolute;
-  /* top: 0;
-  left: 0; */
+
   border: 1px solid white;
   background: black;
 }
-rocket {
-  background: white;
-}
-#ship {
-  top: 80%;
-  left: 50%;
 
-  border: 1px solid red;
-  background: transparent;
-}
+
 body {
   margin : 0;
 }

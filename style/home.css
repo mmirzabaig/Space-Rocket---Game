@@ -2,7 +2,25 @@ body {
   background-color: black;
 
 }
+h2 {
+  font-family: 'Orbitron', sans-serif;
+  position: relative;
+  font-size: 80px;
+  top: 250px;
+  left: 20%;
+  color: white;
+}
+h2:hover{
+  color: blue;
+
+}
+/* p {
+  color: white;
+} */
+
+
 h1 {
+
   position: relative;
   font-family: 'Orbitron', sans-serif;
   color: white;
@@ -16,9 +34,9 @@ h1:hover{
 .welcome {
   font-size: 20px;
   font-variant: small-caps;
-  position: relative;
-  margin-top: 25%;
-  margin-left: 45%;
+  position: absolute;
+  top: 50%;
+  left: 45%;
 
 
 }

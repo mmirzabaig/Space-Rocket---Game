@@ -9,9 +9,15 @@ const ctx = canvas.getContext('2d');
 ctx.font = "30px Comic Sans MS";
 ctx.fillStyle = "white";
 ctx.textAlign = "center";
-ctx.fillText("Press Number 2 Key to Spawn Player 2", canvas.width/2, canvas.height/2);
-ctx.fillText("Click Anywhere to Begin Game", canvas.width/2, canvas.height/1.8);
+ctx.fillText("Press Number 2 Key to Spawn Player 2", canvas.width / 2, canvas.height / 2);
+ctx.fillText("Click Anywhere to Begin Game", canvas.width / 2, canvas.height / 1.8);
 let sum = 0;
+function drawScore() {
+    ctx.font = "16px Arial";
+    ctx.fillStyle = "white";
+    console.log('hello');
+    ctx.fillText("Score: "+sum, 50, 20);
+}
 // myImages.push(myCanvasImage);
 
 const getDistance = (x1, x2, y1, y2) => {
@@ -35,7 +41,7 @@ function keyDownHandler(e) {
   }
   if (e.keyCode == 68) {
     righTpresseD = true;
-} else if (e.keyCode == 65) {
+  } else if (e.keyCode == 65) {
     lefTpresseD = true;
   }
 
@@ -80,11 +86,11 @@ class Player2 {
     ctx.beginPath();
     ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
     //ctx.strokeStyle = 'blue';
-    if(player2Sum.length > 0) {
-    ctx.fillStyle = 'maroon';
-  } else {
-    ctx.fillStyle = 'rgb(254,187,187)';
-  }
+    if (player2Sum.length > 0) {
+      ctx.fillStyle = 'maroon';
+    } else {
+      ctx.fillStyle = 'rgb(254,187,187)';
+    }
     ctx.fill();
     ctx.stroke();
   }
@@ -169,10 +175,8 @@ class Planet {
     ctx.beginPath();
     ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
     // ctx.strokeStyle = 'blue';
-    const colors = ['green', 'red', 'brown', 'yellow', 'white']
 
-
-    ctx.fillStyle = 'green';
+    ctx.fillStyle = 'white';
 
     ctx.fill();
     ctx.stroke();
@@ -215,9 +219,9 @@ class Planet {
 
       const player2Distance = getDistance(player2.x, this.x, player2.y, this.y);
       if (player2Distance < player2.radius + this.radius) {
-        if(number2){
-        player2Sum.push(planetArray.splice(i, 1));
-}
+        if (number2) {
+          player2Sum.push(planetArray.splice(i, 1));
+        }
         // ctx.fillText(sumArray.length, canvas.width/2, canvas.height/2);
         // console.log(sumArray.length);
         break;
@@ -263,51 +267,72 @@ function animate() {
 
   }
   rocket.update();
-
-  if(number2) {
+  drawScore();
+  if (number2) {
     player2.draw();
-  player2.update();
-  // rocket();
-}
+    player2.update();
+
+    // rocket();
+  }
 }
 
 let time = 800;
-const SETTIMER = () => {
-
-  // const TIMER = setInterval(() => {
-  //   const x = Math.random() * innerWidth;
-  //   const y = Math.random() * 20;
-  //   const dx = 0;
-  //   const dy = 5;
-  //
-  //   let radi = [10, 7, 5]
-  //   let radius = radi[Math.floor(Math.random() * radi.length)];
-  //
-  //   // const colors = ['green', 'red', 'brown', 'yellow', 'white']
-  //   // let coloR = colors[Math.floor(Math.random() * colors.length)];
-  //
-  //   planetArray.push(new Planet(x, y, dx, dy, radius, 'yellow'));
-  //
-  //   // console.log(sumArray);
-  //   // if(sumArray.length > 4) {
-  //   //   console.log(sumArray);
-  //   //   ctx.font = "30px Comic Sans MS";
-  //   //   ctx.fillStyle = "red";
-  //   //   ctx.textAlign = "center";
-  //   //   ctx.fillText(sumArray.length, canvas.width/2, canvas.height/2);
-  //   //   clearInterval(TIMER);
-  //   // }
-  //
-  //   time--;
-  //
-  //
-  //   if (time === 0) {
-  //
-  //     clearInterval(TIMER);
-  //
-  //   }
-  // }, 8000)
-}
+// const SETTIMER = () => {
+//
+//   const TIMER = setInterval(() => {
+//      const x = Math.random() * innerWidth;
+//     const y = Math.random() * 20;
+//     const dx = 0;
+//     const dy = 9;
+//
+//     let radi = [10, 7, 5]
+//     let radius = radi[Math.floor(Math.random() * radi.length)];
+//
+//     // const colors = ['green', 'red', 'brown', 'yellow', 'white']
+//     // let coloR = colors[Math.floor(Math.random() * colors.length)];
+//
+//     planetArray.push(new Planet(x, y, dx, dy, radius));
+//
+//
+//
+//
+//
+//     time--;
+//
+//     if (sumArray.length === 1) {
+//
+//       rocket.color = 'red';
+//       // rocket.update();
+//     }
+//     if (sumArray.length > 0) {
+//       swal('Player 2 Wins!');
+//       clearInterval(TIMER);
+//       ctx.font = "30px Comic Sans MS";
+//       ctx.fillStyle = "red";
+//       ctx.textAlign = "center";
+//       ctx.fillText('hello', canvas.width / 2, canvas.height / 2);
+//       // ctx.font = "30px Comic Sans MS";
+//       // ctx.fillStyle = "red";
+//       // ctx.textAlign = "center";
+//       // ctx.fillText(sumArray.length, canvas.width/2, canvas.height/2);
+//
+//     }
+//     if (player2Sum.length > 0) {
+//       swal('Player 1 Wins!');
+//       ctx.font = "30px Comic Sans MS";
+//       ctx.fillStyle = "red";
+//       ctx.textAlign = "center";
+//       ctx.fillText('hello', canvas.width / 2, canvas.height / 2);
+//       clearInterval(TIMER);
+//
+//     }
+//     if (time === 0) {
+//       swal('You Win!');
+//       clearInterval(TIMER);
+//
+//     }
+//   }, 80)
+// }
 const setTimer = () => {
 
   const timer = setInterval(() => {
@@ -346,30 +371,30 @@ const setTimer = () => {
       rocket.color = 'red';
       // rocket.update();
     }
-    if(sumArray.length > 0) {
+    if (sumArray.length > 0) {
       swal('Player 2 Wins!');
       clearInterval(timer);
       ctx.font = "30px Comic Sans MS";
       ctx.fillStyle = "red";
       ctx.textAlign = "center";
-      ctx.fillText('hello', canvas.width/2, canvas.height/2);
+      ctx.fillText('hello', canvas.width / 2, canvas.height / 2);
       // ctx.font = "30px Comic Sans MS";
       // ctx.fillStyle = "red";
       // ctx.textAlign = "center";
       // ctx.fillText(sumArray.length, canvas.width/2, canvas.height/2);
 
     }
-    if(player2Sum.length > 0) {
+    if (player2Sum.length > 0) {
       swal('Player 1 Wins!');
       ctx.font = "30px Comic Sans MS";
       ctx.fillStyle = "red";
       ctx.textAlign = "center";
-      ctx.fillText('hello', canvas.width/2, canvas.height/2);
+      ctx.fillText('hello', canvas.width / 2, canvas.height / 2);
       clearInterval(timer);
 
     }
     if (time === 0) {
-        swal('You Win!');
+      swal('You Win!');
       clearInterval(timer);
 
     }
